@@ -7,7 +7,7 @@ import joblib
 import os
 
 # Load model
-model = joblib.load('best_model_1csvm.pkl')
+model = joblib.load('best_model_iso.pkl')
 
 # Create FastAPI app
 app = FastAPI()

@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git 'https://github.com/girishofficial/IOT_Anomaly.git'
+                git branch: 'main', url: 'https://github.com/girishofficial/IOT_Anomaly.git'
             }
         }
 

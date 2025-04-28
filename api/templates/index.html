@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IoT Anomaly Detection</title>
+    <script>
+        async function sendData() {
+            const vent = document.getElementById("vent").value;
+            const pluie = document.getElementById("pluie").value;
+            const temp = document.getElementById("temp").value;
+
+            const response = await fetch("/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    vent: parseFloat(vent),
+                    pluie: parseFloat(pluie),
+                    temp: parseFloat(temp)
+                })
+            });
+
+            const result = await response.json();
+            document.getElementById("result").innerText = "Prediction: " + result.status;
+        }
+    </script>
+</head>
+<body>
+    <h1>IoT Anomaly Detection</h1>
+    <form onsubmit="event.preventDefault(); sendData();">
+        <label>Vent (wind speed):</label><br>
+        <input type="number" id="vent" step="0.01"><br><br>
+
+        <label>Pluie (rainfall):</label><br>
+        <input type="number" id="pluie" step="0.01"><br><br>
+
+        <label>Temp (mean temperature):</label><br>
+        <input type="number" id="temp" step="0.01"><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <h2 id="result"></h2>
+</body>
+</html>
+
